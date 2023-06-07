@@ -45,6 +45,7 @@ def main():
                   'Egg',
                   'Fried food',
                   'Meat',
+                  'Nasi Lemak',
                   'Noodles-Pasta',
                   'Rice',
                   'Seafood',
@@ -52,7 +53,7 @@ def main():
                   'Vegetable-Fruit']
 
     model = load_model(
-        'epoch-29-train-0.84-test0.76.pth', categories=categories)
+        'weights/nasilemak-epoch-29-train-0.81-test0.75.pth', categories=categories)
 
     st.title("Food Image Classification App")
 
