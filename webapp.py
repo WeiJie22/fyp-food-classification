@@ -6,6 +6,7 @@ from torchvision.transforms import transforms
 import torchvision.models as models
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 def load_model(weights_file, categories):
@@ -37,11 +38,19 @@ def preprocess(image):
     return image_transform(image)
 
 
+def get_folder_items(folder_path):
+    items = []
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        if os.path.isfile(item_path):
+            items.append(item)
+    return items
+
+
 def main():
 
     categories = ['Bread',
                   'Dairy product',
-                  'Dessert',
                   'Egg',
                   'Fried food',
                   'Meat',
@@ -52,8 +61,15 @@ def main():
                   'Soup',
                   'Vegetable-Fruit']
 
-    model = load_model(
-        'weights/nasilemak-epoch-29-train-0.81-test0.75.pth', categories=categories)
+    weight_path = 'weights/with data aug'
+
+    items = get_folder_items(weight_path)
+    selected_item = st.selectbox(
+        "Select a weight file", items, format_func=lambda x: x)
+
+    if selected_item:
+        model = load_model(
+            f'{weight_path}/{selected_item}', categories=categories)
 
     st.title("Food Image Classification App")
 
