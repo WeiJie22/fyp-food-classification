@@ -90,7 +90,7 @@ def main():
 
         image_pred_probs = torch.softmax(image_pred, dim=1)
 
-        sorted_probs, sorted_idx = torch.sort(
+        _, sorted_idx = torch.sort(
             image_pred_probs, descending=True)
 
         for i in sorted_idx.squeeze().numpy():
